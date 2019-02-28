@@ -4,7 +4,7 @@ PImage background;
 ArrayList<POI> stations;
 ArrayList<Way> railways;
 ArrayList<POI> trees;
-boolean stationShow, railwayShow, treeShow, infoShow;
+boolean stationShow = true, railwayShow = true, treeShow = true, infoShow = true;
 
 void setup(){
   size(1000, 650);

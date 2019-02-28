@@ -35,6 +35,6 @@ class POI{
       fill(poi_fill);
     }
     noStroke();
-    ellipse(screenLocation.x, screenLocation.y, 6, 6);
+    ellipse(screenLocation.x, screenLocation.y, 10, 10);
   }
 }

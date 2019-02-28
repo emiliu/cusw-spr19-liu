@@ -8,7 +8,7 @@ class Way{
   }
   
   void draw() {
-    strokeWeight(4);
+    strokeWeight(2);
     stroke(road_color);
     for (int i = 0; i < coordinates.size() - 1; i++) {
       PVector screenStart = map.getScreenLocation(coordinates.get(i));
