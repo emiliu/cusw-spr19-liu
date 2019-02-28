@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "water_lines",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "osm_id": 541716023, "layer": "-1", "waterway": "stream", "name": "Hauptsammler Sindelbach", "tunnel": "yes", "boat": "no" }, "geometry": { "type": "LineString", "coordinates": [ [ 9.1056913, 48.7276625 ], [ 9.1057475, 48.7274934 ], [ 9.1066407, 48.7275659 ], [ 9.1071597, 48.7276013 ], [ 9.1079255, 48.7274987 ], [ 9.108478, 48.7274297 ], [ 9.1095267, 48.7274368 ], [ 9.1101235, 48.727305 ], [ 9.1117919, 48.7270626 ], [ 9.1128768, 48.7269192 ], [ 9.1131678, 48.7270059 ], [ 9.1144884, 48.7276484 ], [ 9.1145534, 48.7276593 ], [ 9.1158781, 48.7273904 ] ] } }
+]
+}

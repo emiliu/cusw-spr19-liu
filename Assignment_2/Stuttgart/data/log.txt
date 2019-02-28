@@ -1,0 +1,4 @@
+Warning 1: The output driver does not natively support Date type for field guidepost:lastcheck. Misconversion can happen. -mapFieldType can be used to control field type conversion.
+Warning 1: The output driver does not natively support Date type for field collection_times:lastcheck. Misconversion can happen. -mapFieldType can be used to control field type conversion.
+Warning 1: The output driver does not natively support Date type for field lastcheck. Misconversion can happen. -mapFieldType can be used to control field type conversion.
+Warning 1: The output driver does not natively support Date type for field check_date. Misconversion can happen. -mapFieldType can be used to control field type conversion.

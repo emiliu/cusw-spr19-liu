@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "tunnels",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "osm_id": 230015864, "layer": "-2", "highway": "footway", "surface": "paving_stones", "tunnel": "yes", "lit": "yes", "level": "-1" }, "geometry": { "type": "LineString", "coordinates": [ [ 9.1151533, 48.7278656 ], [ 9.1151303, 48.7278518 ] ] } },
+{ "type": "Feature", "properties": { "osm_id": 30173690, "layer": "-1", "highway": "footway", "surface": "paving_stones", "tunnel": "yes", "lit": "yes", "level": "-1" }, "geometry": { "type": "LineString", "coordinates": [ [ 9.1150552, 48.7280513 ], [ 9.1149678, 48.7279981 ], [ 9.1151533, 48.7278656 ], [ 9.1152816, 48.7277739 ], [ 9.1152588, 48.72776 ] ] } }
+]
+}

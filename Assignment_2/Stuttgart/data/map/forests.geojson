@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "forests",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "osm_id": 392273866, "landuse": "forest" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 9.1152301, 48.7317763 ], [ 9.1164009, 48.7321041 ], [ 9.116798, 48.7322555 ], [ 9.119145, 48.7332659 ], [ 9.1192287, 48.7331339 ], [ 9.1166925, 48.7319351 ], [ 9.1165578, 48.7319992 ], [ 9.1154974, 48.7316656 ], [ 9.1153538, 48.7316568 ], [ 9.1152301, 48.7317763 ] ] ] } }
+]
+}
