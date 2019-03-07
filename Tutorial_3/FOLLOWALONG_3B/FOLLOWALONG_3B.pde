@@ -13,4 +13,8 @@ void setup(){
 
 void draw(){
   background(0);
+  for (Polygon p : CensusPolygons) {
+    p.draw();
+  }
+  county.draw();
 }
