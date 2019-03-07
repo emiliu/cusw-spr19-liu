@@ -1,0 +1,13 @@
+What case study area did you pick and why?
+I picked New Jersey, my home state.
+
+What metrics did you pick and why?
+I wanted to see the age distribution across different school districts.
+
+What statistical test did you use and why?
+I used an ANOVA test to see if one age group in (<5, 5-9, 10-14, 15-19)
+was more or less represented than the others.
+
+What was its result? (again not graded for accuracy)
+I got an f-ratio value of .31 and a p-value of .82, so turns out there
+isn't.
