@@ -46,6 +46,8 @@ ArrayList<POI> pois;
 ArrayList<Way> ways; 
 ArrayList<Polygon> polygons;
 
+Benches benches;
+
 // A function to contain model initialization
 void initModel() {
   
@@ -82,7 +84,7 @@ void setup() {
   
   /* Initialize our model and simulation */
   initModel();
-  
+  benches = new Benches();
 }
 
 void draw() {
@@ -95,6 +97,8 @@ void draw() {
   ///*  Displays the Graph in grayscale */
   tint(255, 75); // overlaid as an image
   image(network.img, 0, 0);
+  
+  benches.draw();
   
   /*  Displays the path last calculated in Pathfinder.
    *  The results are overridden everytime findPath() is run.
@@ -127,4 +131,8 @@ void draw() {
 
 void keyPressed() {
   initPaths();
+}
+
+void mouseClicked() {
+  benches.add(mouseX, mouseY);
 }

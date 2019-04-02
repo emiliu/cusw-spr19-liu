@@ -183,7 +183,7 @@ void initWanderers(int count) {
     if (random_node.adj_ID.size() > 1) {
       PVector loc = random_node.loc;
       float random_speed = random(0.1, 0.3);
-      Wanderer person = new Wanderer(loc.x, loc.y, 5, random_speed, network, random_node);
+      Wanderer person = new Wanderer(loc.x, loc.y, 5, random_speed, random_node);
       people.add(person);
     }
   }

@@ -1,17 +1,15 @@
 class Wanderer extends Person {
   Node start;
   Node end;
-  Graph graph;
   
-  Wanderer(float x, float y, int rad, float maxS, Graph g, Node start) {
+  Wanderer(float x, float y, int rad, float maxS, Node start) {
     r = rad;
     tolerance *= r;
     maxspeed = maxS;
     maxforce = 0.2;
-    graph = g;
     this.start = start;
     int index = int(random(start.adj_ID.size()));
-    this.end = g.nodes.get(start.adj_ID.get(index));
+    this.end = network.nodes.get(start.adj_ID.get(index));
     
     float jitterX = random(-tolerance, tolerance);
     float jitterY = random(-tolerance, tolerance);
@@ -42,12 +40,17 @@ class Wanderer extends Person {
     // Update velocity
     velocity.add(acceleration);
     
+    // Rest if by a bench
+    if (benches.seated(this)) {
+      velocity.limit(0.01);
+    }
+    
     // Update Location
     location.add(new PVector(velocity.x, velocity.y));
         
     // Limit speed
     velocity.limit(maxspeed);
-    
+      
     // Reset acceleration to 0 each cycle
     acceleration.mult(0);
     
@@ -57,8 +60,46 @@ class Wanderer extends Person {
     if (prox < 3 && end.adj_ID.size() > 0) {
       start = end;
       int index = int(random(end.adj_ID.size()));
-      end = graph.nodes.get(end.adj_ID.get(index));
+      end = network.nodes.get(end.adj_ID.get(index));
     }
   }
   
+}
+
+class Benches {
+  ArrayList<Bench> benches;
+  Benches() {
+    benches = new ArrayList<Bench>();
+  }
+  void add(float x, float y) {
+    benches.add(new Bench(x, y));
+  }
+  boolean seated(Person p) {
+    if (benches.size() < 1) return false;
+    for (Bench b : benches) {
+      if (sqrt(sq(b.loc.x - p.location.x) + sq(b.loc.y - p.location.y)) < b.radius) {
+        return true;
+      }
+    }
+    return false;
+  }
+  void draw() {
+    for (Bench b : benches) b.draw();
+  }
+}
+
+class Bench {
+  PVector loc;
+  float radius;
+  
+  Bench(float x, float y) {
+    loc = new PVector(x, y);
+    radius = 40;
+  }
+  
+  void draw() {
+    noStroke();
+    fill(0);
+    ellipse(loc.x, loc.y, radius, radius);
+  }
 }
