@@ -1,24 +1,30 @@
+JSONObject example;
 JSONArray features;
 JSONObject wholeArea;
+//Look at https://processing.org/reference/JSONObject.html for more info
 
-void loadData() {
-  // image
+void loadData(){
+  /* Load and resize background image */
   background = loadImage("data/background.png");
-  background.resize(0, height);
+  background.resize(width, height);
   
-  wholeArea = loadJSONObject("data/mygeodata_merged.json");
+  /* Whole Area */
+  wholeArea = loadJSONObject("data/wholeArea.json");
   features = wholeArea.getJSONArray("features");
+  
   println("There are : ", features.size(), " features."); 
 }
 
-void parseData() {
+void parseData(){
+  //First do the general object
+  JSONObject feature = features.getJSONObject(0);
 
   //Sort 3 types into our respective classes to draw
   for(int i = 0; i< features.size(); i++){
     //Idenitfy 3 main things; the properties, geometry, and type 
     String type = features.getJSONObject(i).getJSONObject("geometry").getString("type");
     JSONObject geometry = features.getJSONObject(i).getJSONObject("geometry");
-    //JSONObject properties =  features.getJSONObject(i).getJSONObject("properties");
+    JSONObject properties =  features.getJSONObject(i).getJSONObject("properties");
     
     //Make POIs if it's a point
     if(type.equals("Point")){
@@ -63,5 +69,22 @@ void parseData() {
       ways.add(way);
     }
     
+  }
+}
+
+void drawGISObjects() {
+  /* Draw all the ways (roads, sidewalks, etc) */
+  for(int i = 0; i<ways.size(); i++){
+    ways.get(i).draw();
+  }
+  
+  /* Draw all polygons */ 
+  for(int i = 0; i<polygons.size(); i++){
+    polygons.get(i).draw();
+  }
+
+  /* Draw all POIs */
+  for(int i = 0; i<pois.size(); i++){
+    pois.get(i).draw();
   }
 }
