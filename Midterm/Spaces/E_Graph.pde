@@ -137,6 +137,26 @@ class Graph {
     render(255, 255);
   }
   
+  void union(Graph g) {
+    ArrayList<Node> other = g.nodes;
+    //other.removeAll(nodes);
+    nodes.addAll(other);
+    generateEdges();
+  }
+  
+  // Only keeps Nodes that intersect with an ObstacleCourse (e.g. land area)
+  //
+  void applyLandArea(ObstacleCourse c) {
+    ArrayList<Node> tmp = nodes;
+    nodes = new ArrayList<Node>();
+    for (int i=tmp.size()-1; i>=0; i--) {
+      if(c.pointInCourse(tmp.get(i).loc)) {
+        nodes.add(tmp.get(i));
+      }
+    }
+    generateEdges();
+  }
+  
   // Removes Nodes that intersect with set of obstacles
   //
   void applyObstacleCourse(ObstacleCourse c) {

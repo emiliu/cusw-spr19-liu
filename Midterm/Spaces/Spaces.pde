@@ -3,7 +3,7 @@
  *  Nina Lutz, nlutz@mit.edu
  *  Coded w/ Processing 3 (Java)
  *
- *  The Main Tab "Tutoiral_3A_Agents" shows an example implementation of 
+ *  The Main Tab "Tutorial_3A_Agents" shows an example implementation of 
  *  algorithms useful for finding shortest pathes snapped to a gridded or OSM-based 
  *  network. Explore the various tabs to see how they work.
  *
@@ -51,22 +51,27 @@ void initModel() {
   
   /* Step 1: Initialize Network Using ONLY ONE of these methods */
   //randomNetwork(0.5); // a number between 0.0 and 1.0 specifies how 'porous' the network is
-  waysNetwork(ways);
+  //waysNetwork(ways);
   //randomNetworkMinusBuildings(0.1, polygons); // a number between 0.0 and 1.0 specifies how 'porous' the network is
-  
+  randomNetworkOnLand(0.1, polygons, ways);
+  initPaths();
+}
+
+void initPaths() {
   /* Step 2: Initialize Paths Using ONLY ONE of these methods */
   //randomPaths(1);
-  poiPaths(1);
+  //poiPaths(1);
   
   /* Step 3: Initialize Population */
-  initPopulation(30*paths.size());
+  //initPopulation(10*paths.size());
+  initWanderers(100);
 }
 
 void setup() {
-  size(900, 650);
+  size(1000, 650);
   
   /* Intialize your data structures early in setup */
-  map = new MercatorMap(width, height, 42.36244, 42.35537, -71.10105, -71.08809, 0); // Coordinates pulled from OSM Export
+  map = new MercatorMap(width, height, 41.88513, 41.88022, -87.62489, -87.61399, 0); // Coordinates pulled from OSM Export
   polygons = new ArrayList<Polygon>();
   ways = new ArrayList<Way>();
   pois = new ArrayList<POI>();
@@ -84,10 +89,10 @@ void draw() {
   background(0);
   
   /* background image from OSM */
-  //image(background, 0, 0);
+  image(background, 0, 0);
   //drawGISObjects();
   
-  /*  Displays the Graph in grayscale */
+  ///*  Displays the Graph in grayscale */
   tint(255, 75); // overlaid as an image
   image(network.img, 0, 0);
   
@@ -101,25 +106,25 @@ void draw() {
   /*  Displays the path properties.
    *  FORMAT: display(color, alpha)
    */
-  for (Path p: paths) {
-    p.display(100, 100);
-  }
+  //for (Path p: paths) {
+  //  p.display(100, 100);
+  //}
   
   /*  Update and Display the population of agents
    *  FORMAT: display(color, alpha)
    */
   boolean collisionDetection = true;
-  for (Agent p: people) {
+  for (Person p: people) {
     p.update(personLocations(people), collisionDetection);
     p.display(#FFFFFF, 255);
   }
   
-  //UI:
-  fill(255);
-  text("Press any key to regenerate model", 25, 25);
+  ////UI:
+  //fill(255);
+  //text("Press any key to regenerate model", 25, 25);
   
 }
 
 void keyPressed() {
-  initModel();
+  initPaths();
 }

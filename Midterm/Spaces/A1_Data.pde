@@ -1,6 +1,6 @@
-JSONObject example;
-JSONArray features;
-JSONObject wholeArea;
+JSONArray roadFeatures;
+JSONArray landFeatures;
+JSONArray pointFeatures;
 //Look at https://processing.org/reference/JSONObject.html for more info
 
 void loadData(){
@@ -9,16 +9,23 @@ void loadData(){
   background.resize(width, height);
   
   /* Whole Area */
-  wholeArea = loadJSONObject("data/wholeArea.json");
-  features = wholeArea.getJSONArray("features");
+  roadFeatures = loadJSONObject("data/map/roads.geojson").getJSONArray("features");
+  landFeatures = loadJSONObject("data/map/landcover.geojson").getJSONArray("features");
+  pointFeatures = loadJSONObject("data/map/amenity_points.geojson").getJSONArray("features");
   
-  println("There are : ", features.size(), " features."); 
+  println("There are :", roadFeatures.size(), "road features."); 
+  println("There are :", landFeatures.size(), "land features."); 
+  println("There are :", pointFeatures.size(), "amenity features."); 
 }
 
 void parseData(){
-  //First do the general object
-  JSONObject feature = features.getJSONObject(0);
+  parseFeatureData(roadFeatures);
+  parseFeatureData(landFeatures);
+  parseFeatureData(pointFeatures);
+}
 
+void parseFeatureData(JSONArray features){
+  
   //Sort 3 types into our respective classes to draw
   for(int i = 0; i< features.size(); i++){
     //Idenitfy 3 main things; the properties, geometry, and type 
@@ -73,14 +80,14 @@ void parseData(){
 }
 
 void drawGISObjects() {
-  /* Draw all the ways (roads, sidewalks, etc) */
-  for(int i = 0; i<ways.size(); i++){
-    ways.get(i).draw();
-  }
-  
   /* Draw all polygons */ 
   for(int i = 0; i<polygons.size(); i++){
     polygons.get(i).draw();
+  }
+  
+  /* Draw all the ways (roads, sidewalks, etc) */
+  for(int i = 0; i<ways.size(); i++){
+    ways.get(i).draw();
   }
 
   /* Draw all POIs */

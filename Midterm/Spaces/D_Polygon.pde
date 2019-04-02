@@ -1,7 +1,7 @@
 class Polygon{
   //Shape, coordinates, and color variables
   PShape p;
-  ArrayList<PVector>coordinates;
+  ArrayList<PVector>coordinates;  
   color fill;
 
   //Empty constructor

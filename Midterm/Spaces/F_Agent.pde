@@ -1,4 +1,4 @@
-class Agent {
+class Person {
   PVector location;
   PVector velocity;
   PVector acceleration;
@@ -6,29 +6,6 @@ class Agent {
   float maxforce;
   float maxspeed;
   float tolerance = 1;
-  ArrayList<PVector> path;
-  int pathIndex, pathLength; // Index and Amount of Nodes in a Path
-  int pathDirection; // -1 or +1 to specific directionality
-  
-  Agent(float x, float y, int rad, float maxS, ArrayList<PVector> path) {
-    r = rad;
-    tolerance *= r;
-    maxspeed = maxS;
-    maxforce = 0.2;
-    this.path = path;
-    pathLength = path.size();
-    if (random(-1, 1) <= 0 ) {
-      pathDirection = -1;
-    } else {
-      pathDirection = +1;
-    }
-    float jitterX = random(-tolerance, tolerance);
-    float jitterY = random(-tolerance, tolerance);
-    location = new PVector(x + jitterX, y + jitterY);
-    acceleration = new PVector(0, 0);
-    velocity = new PVector(0, 0);
-    pathIndex = getClosestWaypoint(location);
-  }
   
   PVector seek(PVector target){
     PVector desired = PVector.sub(target,location);
@@ -55,7 +32,7 @@ class Agent {
         sum.add(diff);
         count++;
       }
-    }
+  }
     if (count > 0){
       sum.div(count);
       sum.normalize();
@@ -64,6 +41,41 @@ class Agent {
       sum.limit(maxforce);
     }
    return sum;   
+  }
+  
+  void update(ArrayList<PVector> others, boolean collisionDetection) { }
+  
+  void display(color col, int alpha) {
+    fill(col, alpha);
+    noStroke();
+    ellipse(location.x, location.y, r, r);
+  }
+  
+}
+
+class Agent extends Person {
+  ArrayList<PVector> path;
+  int pathIndex, pathLength; // Index and Amount of Nodes in a Path
+  int pathDirection; // -1 or +1 to specific directionality
+  
+  Agent(float x, float y, int rad, float maxS, ArrayList<PVector> path) {
+    r = rad;
+    tolerance *= r;
+    maxspeed = maxS;
+    maxforce = 0.2;
+    this.path = path;
+    pathLength = path.size();
+    if (random(-1, 1) <= 0 ) {
+      pathDirection = -1;
+    } else {
+      pathDirection = +1;
+    }
+    float jitterX = random(-tolerance, tolerance);
+    float jitterY = random(-tolerance, tolerance);
+    location = new PVector(x + jitterX, y + jitterY);
+    acceleration = new PVector(0, 0);
+    velocity = new PVector(0, 0);
+    pathIndex = getClosestWaypoint(location);
   }
   
   // calculates the index of path node closest to the given canvas coordinate 'v'.
@@ -125,11 +137,5 @@ class Agent {
       }
       pathIndex += pathDirection;
     }
-  }
-  
-  void display(color col, int alpha) {
-    fill(col, alpha);
-    noStroke();
-    ellipse(location.x, location.y, r, r);
   }
 }

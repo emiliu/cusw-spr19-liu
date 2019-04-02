@@ -8,7 +8,7 @@ Pathfinder finder;
 ArrayList<Path> paths;
 
 //  Objects to define agents that navigate our environment
-ArrayList<Agent> people;
+ArrayList<Person> people;
 
 void randomNetwork(float cull) {
   //  An example gridded network of width x height (pixels) and node resolution (pixels)
@@ -46,6 +46,39 @@ void randomNetworkMinusBuildings(float cull, ArrayList<Polygon> poly) {
   //
   network.cullRandom(cull); // Randomly eliminates a fraction of the nodes in the network (0.0 - 1.0)
   network.applyObstacleCourse(course);
+  
+}
+
+void randomNetworkOnLand(float cull, ArrayList<Polygon> poly, ArrayList<Way> w) {
+  //  An example gridded network of width x height (pixels) and node resolution (pixels)
+  //
+  int nodeResolution = 10;  // pixels
+  int graphWidth = width;   // pixels
+  int graphHeight = height; // pixels
+  network = new Graph(graphWidth, graphHeight, nodeResolution);
+  
+  // An obstacle Course Based Upon Building Footprints
+  //
+  course = new ObstacleCourse();
+  for (Polygon p: poly) {
+    int numCorners = p.coordinates.size();
+    PVector[] corners = new PVector[numCorners];
+    for (int i=0; i<numCorners; i++) {
+      PVector screenLocation = map.getScreenLocation(p.coordinates.get(i));
+      corners[i] = new PVector(screenLocation.x, screenLocation.y);
+    }
+    Obstacle o = new Obstacle(corners);
+    course.addObstacle(o);
+  }
+  
+  // Subtract Building Footprints from Network
+  //
+  network.cullRandom(cull); // Randomly eliminates a fraction of the nodes in the network (0.0 - 1.0)
+  network.applyLandArea(course);
+  
+  //Graph waysNetwork = new Graph(graphWidth, graphHeight, nodeResolution, w);
+  //network.union(waysNetwork);
+  //network.cullRandom(cull); // Randomly eliminates a fraction of the nodes in the network (0.0 - 1.0)
   
 }
 
@@ -125,7 +158,7 @@ void initPopulation(int count) {
   /*  An example population that traverses along various paths
   *  FORMAT: Agent(x, y, radius, speed, path);
   */
-  people = new ArrayList<Agent>();
+  people = new ArrayList<Person>();
   for (int i=0; i<count; i++) {
     int random_index = int(random(paths.size()));
     Path random_path = paths.get(random_index);
@@ -139,9 +172,26 @@ void initPopulation(int count) {
   }
 }
 
-ArrayList<PVector> personLocations(ArrayList<Agent> people) {
+void initWanderers(int count) {
+  /*  An example population that traverses along various paths
+  *  FORMAT: Agent(x, y, radius, speed, path);
+  */
+  people = new ArrayList<Person>();
+  for (int i=0; i<count; i++) {
+    int random_index = int(random(network.nodes.size()));
+    Node random_node = network.nodes.get(random_index);
+    if (random_node.adj_ID.size() > 1) {
+      PVector loc = random_node.loc;
+      float random_speed = random(0.1, 0.3);
+      Wanderer person = new Wanderer(loc.x, loc.y, 5, random_speed, network, random_node);
+      people.add(person);
+    }
+  }
+}
+
+ArrayList<PVector> personLocations(ArrayList<Person> people) {
   ArrayList<PVector> l = new ArrayList<PVector>();
-  for (Agent a: people) {
+  for (Person a: people) {
     l.add(a.location);
   }
   return l;
