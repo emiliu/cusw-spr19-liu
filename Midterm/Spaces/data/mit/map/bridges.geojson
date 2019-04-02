@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "bridges",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "osm_id": 43359507, "bridge": "yes", "access": "permissive", "highway": "footway", "foot": "permissive", "layer": null }, "geometry": { "type": "LineString", "coordinates": [ [ -71.0902742, 42.3606849 ], [ -71.0904316, 42.3608397 ] ] } },
+{ "type": "Feature", "properties": { "osm_id": 32526481, "bridge": "yes", "access": null, "highway": "footway", "foot": null, "layer": "1" }, "geometry": { "type": "LineString", "coordinates": [ [ -71.0886201, 42.3611459 ], [ -71.0886194, 42.3610112 ] ] } }
+]
+}

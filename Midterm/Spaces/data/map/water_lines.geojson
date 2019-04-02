@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "water_lines",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "osm_id": 126977942, "waterway": "stream" }, "geometry": { "type": "LineString", "coordinates": [ [ -87.621379, 41.8818495 ], [ -87.6214741, 41.8817208 ], [ -87.6215228, 41.8816437 ], [ -87.621568, 41.8815742 ], [ -87.6216144, 41.8814971 ], [ -87.6216699, 41.8814023 ], [ -87.6217344, 41.881283 ], [ -87.6217865, 41.8811798 ], [ -87.6218702, 41.8809995 ] ] } }
+]
+}

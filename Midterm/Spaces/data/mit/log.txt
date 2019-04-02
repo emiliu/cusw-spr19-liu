@@ -1,0 +1,1 @@
+Warning 1: The output driver does not natively support Date type for field massgis:ATT_DATE. Misconversion can happen. -mapFieldType can be used to control field type conversion.
