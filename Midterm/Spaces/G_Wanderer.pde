@@ -83,6 +83,32 @@ class Benches {
     }
     return false;
   }
+  void toggle(float x, float y) {
+    for (int i = 0; i < benches.size(); i++) {
+      Bench b = benches.get(i);
+      if (sqrt(sq(b.loc.x - x) + sq(b.loc.y - y)) < b.radius) {
+        benches.remove(i);
+        return;
+      }
+    }
+    this.add(x, y);
+  }
+  void checkSelections() {
+    for (Bench b : benches) {
+      if (b.lock) {
+        return;
+      }
+      if (sqrt(sq(b.loc.x - mouseX) + sq(b.loc.y - mouseY)) < b.radius) {
+        b.lock = true;
+        return;
+      }
+    }
+  }
+  void releaseAll() {
+    for (Bench b : benches) {
+      b.lock = false;
+    }
+  }
   void draw() {
     for (Bench b : benches) b.draw();
   }
@@ -91,15 +117,22 @@ class Benches {
 class Bench {
   PVector loc;
   float radius;
+  boolean lock;
   
   Bench(float x, float y) {
     loc = new PVector(x, y);
-    radius = 40;
+    radius = 20;
+    lock = false;
+  }
+  
+  void updateLocation() {
+    loc = new PVector(mouseX, mouseY);
   }
   
   void draw() {
+    if (lock) this.updateLocation();
     noStroke();
     fill(0);
-    ellipse(loc.x, loc.y, radius, radius);
+    ellipse(loc.x, loc.y, radius*2, radius*2);
   }
 }

@@ -134,5 +134,13 @@ void keyPressed() {
 }
 
 void mouseClicked() {
-  benches.add(mouseX, mouseY);
+  benches.toggle(mouseX, mouseY);
+}
+
+void mousePressed() {
+  benches.checkSelections();
+}
+
+void mouseReleased() {
+  benches.releaseAll();
 }
