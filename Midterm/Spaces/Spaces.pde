@@ -47,6 +47,7 @@ ArrayList<Way> ways;
 ArrayList<Polygon> polygons;
 
 Benches benches;
+boolean displayInfo;
 
 // A function to contain model initialization
 void initModel() {
@@ -85,6 +86,8 @@ void setup() {
   /* Initialize our model and simulation */
   initModel();
   benches = new Benches();
+  
+  displayInfo = true;
 }
 
 void draw() {
@@ -95,7 +98,7 @@ void draw() {
   //drawGISObjects();
   
   ///*  Displays the Graph in grayscale */
-  tint(255, 75); // overlaid as an image
+  tint(255, 150); // overlaid as an image
   image(network.img, 0, 0);
   
   benches.draw();
@@ -123,14 +126,27 @@ void draw() {
     p.display(#FFFFFF, 255);
   }
   
-  ////UI:
-  //fill(255);
-  //text("Press any key to regenerate model", 25, 25);
-  
+  //Info
+  if (displayInfo) {
+    fill(0, 150);
+    rect(50, 50, width-100, height-100);
+    fill(255);
+    textSize(48);
+    text("Millennium Park", 100, 150);
+    textSize(28);
+    text("White dots represent park visitors and", 100, 250);
+    text("black circles represent benches.", 100, 290);
+    text("Press i to toggle this information panel", 100, 340);
+    text("and any other key to regenerate the people.", 100, 380);
+  }
 }
 
 void keyPressed() {
-  initPaths();
+  if (key == 'i') {
+    displayInfo = !displayInfo;
+  } else {
+    initPaths();
+  }
 }
 
 void mouseClicked() {
